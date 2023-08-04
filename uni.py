@@ -614,7 +614,7 @@ class BFS:
        while self.__queue.give_length() - 1 >= 0:
         item = self.__queue.pop()
         if item != -1:
-            for i in range(num_of_vertices ** 2):
+            for i in range(self.__num_of_vertices ** 2):
                 vertex = i % self.__num_of_vertices
                 drayer = int(input())
                 if(drayer == 1):
@@ -625,7 +625,7 @@ class BFS:
                         q.add(vertex)
                 if(vertex == 0):
                     self.__color[item] = "B"
-                if(vertex == num_of_vertices - 1):
+                if(vertex == self.__num_of_vertices - 1):
                     item = self.__queue.pop()
             print(item)
 
