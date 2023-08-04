@@ -629,7 +629,7 @@ class BFS:
                     item = self.__queue.pop()
             print(item)
 
-       print(f"{color},{distance},{p}")
+       print(f"{self.__color},{self.__distance},{self.__parent}")
        self.reset_C_D_P()
 
 
