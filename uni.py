@@ -534,6 +534,35 @@ class queue:
             
     def give_length(self):
         return self.__length
+    
+    
+    
+    
+class stack:
+    
+    def __init__(self):
+        self.__length = 0
+        self.__list = []
+        
+    def add(self,num):
+        self.__length += 1
+        self.__list.append(num)
+    
+    def pop(self):
+        if(self.__length - 1 >= 0):
+           item = self.__list[-1]
+           del self.__list[-1]
+           self.__length -= 1
+           return item
+        else:
+            return -1
+        
+    def give_stack(self):
+        return self.__list
+    
+            
+    def give_length(self):
+        return self.__length
         
     
 
@@ -653,22 +682,124 @@ class BFS:
     
     
 
-vertices = int(input())
-num_of_edges = int(input())
-def create_matrix(vertices,num_of_edges):
-    grph = graph(vertices)
-    return grph.create_graph_with_edge(num_of_edges)
+# vertices = int(input())
+# num_of_edges = int(input())
+# def create_matrix(vertices,num_of_edges):
+#     grph = graph(vertices)
+#     return grph.create_graph_with_edge(num_of_edges)
     
 
-def get_greatest_distance(dict_graph,vertices):
-    bfs = BFS(dict_graph, vertices)
-    distance_matrices = bfs.get_distance_for_all_vertices()
-    greatest_distance = bfs.get_greatest_distance(distance_matrices)
+# def get_greatest_distance(dict_graph,vertices):
+#     bfs = BFS(dict_graph, vertices)
+#     distance_matrices = bfs.get_distance_for_all_vertices()
+#     greatest_distance = bfs.get_greatest_distance(distance_matrices)
+#     print()
+#     print(f" greatest distance is : {greatest_distance}")
+
+
+
+
+# dict_graph = create_matrix(vertices,num_of_edges)
+# get_greatest_distance(dict_graph, vertices)
+
+
+
+
+# dfs ===> 
+
+number_of_nodes = 6
+adjacy_matrices = [[0,1,0,0,0,0],[1,0,1,1,0,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,0,0,1,0,0],[0,0,0,0,0,0]]
+visited = [False,False,False,False,False,False]
+components = [0 for i in range(number_of_nodes)]
+stck = stack()
+
+
+def go_forward(vertex , i):
+    stck.add(vertex)
+    print(f"went forward from {vertex} to {i}")
     print()
-    print(f" greatest distance is : {greatest_distance}")
+
+def back_track(i,j):
+    vertex = stck.pop()
+    print(f"backtracked from {i} to {j}")
+    print()
 
 
 
 
-dict_graph = create_matrix(vertices,num_of_edges)
-get_greatest_distance(dict_graph, vertices)
+def find_components(number_of_nodes):
+    counter = 0
+    for i in range(number_of_nodes):
+        if(visited[i] == False):
+            counter += 1
+            dfs(i,counter)
+            print(f"{counter} : {components}")
+            
+
+def dfs(at,counter):
+    visited[at] = True
+    components[at] = counter
+    for i in range(number_of_nodes):
+        if(adjacy_matrices[at][i] == 1):
+            if(visited[i] == False):
+                dfs(i,counter)
+            
+find_components(number_of_nodes)
+    
+            
+                
+
+
+
+
+
+
+
+
+
+# def dfs(num_of_nodes):
+#     go_forward(0,1)
+#     last_length = 0
+#     i = 0
+#     while(stck.give_length() != 0):
+#         for j in range(number_of_nodes):
+#             if visited[j] == False and adjacy_matrices[i][j] == 1:
+#                 visited[j] = True
+#                 go_forward(j, i)
+#                 break
+#         current_stack  = stck.give_length()
+#         if last_length == current_stack:
+#             back_track(i,stck.give_stack()[-1])
+#         last_length = stck.give_length()
+#         if(stck.give_length() > 0):
+#             i = stck.give_stack()[-1]
+                
+                 
+                
+                
+# def dfs(number_of_nodes):
+#     counter = 0
+#     for i in range(number_of_nodes):
+#         if(visited[i] == False) :
+#             counter = counter + 1
+#             visited[i] = True
+#             components[i] = counter
+#             stck.add(i)
+#             while(stck.give_length() -1 >= 0):
+#                 u = stck.pop()
+#                 for n in range(number_of_nodes):
+#                     if(adjacy_matrices[u][n] == 1):
+#                         if(visited[n] != True):
+#                             visited[n] = True
+#                             stck.add(n)
+#                             components[n] = counter
+#     print(f"{components}")
+
+
+
+# dfs(number_of_nodes)
+                            
+                    
+                    
+    
+    
