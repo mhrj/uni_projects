@@ -651,7 +651,7 @@ class BFS:
                         self.__color[vertex] = "G"
                         self.__parent[vertex] = item
                         self.__distance[vertex] = self.__distance[item] + 1
-                        q.add(vertex)
+                        self.__queue.add(vertex)
                 if(vertex == 0):
                     self.__color[item] = "B"
                 if(vertex == self.__num_of_vertices - 1):
@@ -675,7 +675,7 @@ class BFS:
       self.__distance_matrices[vertex]
       while(self.__parent[vertex] != -1):
           print(vertex)
-          vertex = p[vertex]
+          vertex = self.__parent[vertex]
       print(vertex)
          
 
@@ -707,44 +707,44 @@ class BFS:
 
 # dfs ===> 
 
-number_of_nodes = 6
-adjacy_matrices = [[0,1,0,0,0,0],[1,0,1,1,0,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,0,0,1,0,0],[0,0,0,0,0,0]]
-visited = [False,False,False,False,False,False]
-components = [0 for i in range(number_of_nodes)]
-stck = stack()
+# number_of_nodes = 6
+# adjacy_matrices = [[0,1,0,0,0,0],[1,0,1,1,0,0],[0,1,0,0,1,0],[0,1,0,0,1,0],[0,0,0,1,0,0],[0,0,0,0,0,0]]
+# visited = [False,False,False,False,False,False]
+# components = [0 for i in range(number_of_nodes)]
+# stck = stack()
 
 
-def go_forward(vertex , i):
-    stck.add(vertex)
-    print(f"went forward from {vertex} to {i}")
-    print()
+# def go_forward(vertex , i):
+#     stck.add(vertex)
+#     print(f"went forward from {vertex} to {i}")
+#     print()
 
-def back_track(i,j):
-    vertex = stck.pop()
-    print(f"backtracked from {i} to {j}")
-    print()
-
-
+# def back_track(i,j):
+#     vertex = stck.pop()
+#     print(f"backtracked from {i} to {j}")
+#     print()
 
 
-def find_components(number_of_nodes):
-    counter = 0
-    for i in range(number_of_nodes):
-        if(visited[i] == False):
-            counter += 1
-            dfs(i,counter)
-            print(f"{counter} : {components}")
+
+
+# def find_components(number_of_nodes):
+#     counter = 0
+#     for i in range(number_of_nodes):
+#         if(visited[i] == False):
+#             counter += 1
+#             dfs(i,counter)
+#             print(f"{counter} : {components}")
             
 
-def dfs(at,counter):
-    visited[at] = True
-    components[at] = counter
-    for i in range(number_of_nodes):
-        if(adjacy_matrices[at][i] == 1):
-            if(visited[i] == False):
-                dfs(i,counter)
+# def dfs(at,counter):
+#     visited[at] = True
+#     components[at] = counter
+#     for i in range(number_of_nodes):
+#         if(adjacy_matrices[at][i] == 1):
+#             if(visited[i] == False):
+#                 dfs(i,counter)
             
-find_components(number_of_nodes)
+# find_components(number_of_nodes)
     
             
                 
@@ -798,6 +798,82 @@ find_components(number_of_nodes)
 
 
 # dfs(number_of_nodes)
+
+
+vertices = int(input())
+num_of_edges = int(input())
+grph = graph(vertices)
+grph.create_graph_with_edge(num_of_edges)
+bfs = BFS(grph.get_graph(), vertices)
+dist = bfs.get_distance_for_all_vertices()
+
+
+s_vertice = int(input())
+destination_vertice_1 = int(input())
+destination_vertice_2 = int(input())
+
+
+
+
+if dist[s_vertice][destination_vertice_1] < dist[s_vertice][destination_vertice_2]:
+    print(destination_vertice_1)
+else:
+    print(destination_vertice_2)
+
+
+
+
+
+# for i in range(vertices):
+#     for j in range(vertices):
+#         print(dist[i][j],end=" ")
+#     print()
+
+
+
+
+
+
+
+
+
+
+
+# vertex_count = int(input())
+# edge_count = int(input())
+# is_E =True
+# matrix = [[0]*vertex_count for i in range(vertex_count)]
+# for i in range(edge_count):
+#     from_ver=int(input())
+#     to_ver=int(input())
+#     matrix[from_ver][to_ver] = 1
+#     matrix[to_ver][from_ver] = 1
+# for i in range(vertex_count):
+#     if sum(matrix[i]) % 2 != 0:
+#         is_E = False
+#         break
+# if is_E:
+#     print("E")
+# else:
+#     print("NE")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
                             
                     
                     
