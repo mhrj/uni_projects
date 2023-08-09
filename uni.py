@@ -746,15 +746,6 @@ class BFS:
             
 # find_components(number_of_nodes)
     
-            
-                
-
-
-
-
-
-
-
 
 
 # def dfs(num_of_nodes):
@@ -774,53 +765,25 @@ class BFS:
 #         if(stck.give_length() > 0):
 #             i = stck.give_stack()[-1]
                 
-                 
-                
-                
-# def dfs(number_of_nodes):
-#     counter = 0
-#     for i in range(number_of_nodes):
-#         if(visited[i] == False) :
-#             counter = counter + 1
-#             visited[i] = True
-#             components[i] = counter
-#             stck.add(i)
-#             while(stck.give_length() -1 >= 0):
-#                 u = stck.pop()
-#                 for n in range(number_of_nodes):
-#                     if(adjacy_matrices[u][n] == 1):
-#                         if(visited[n] != True):
-#                             visited[n] = True
-#                             stck.add(n)
-#                             components[n] = counter
-#     print(f"{components}")
 
 
-
-# dfs(number_of_nodes)
-
-
-vertices = int(input())
-num_of_edges = int(input())
-grph = graph(vertices)
-grph.create_graph_with_edge(num_of_edges)
-bfs = BFS(grph.get_graph(), vertices)
-dist = bfs.get_distance_for_all_vertices()
+# vertices = int(input())
+# num_of_edges = int(input())
+# grph = graph(vertices)
+# grph.create_graph_with_edge(num_of_edges)
+# bfs = BFS(grph.get_graph(), vertices)
+# dist = bfs.get_distance_for_all_vertices()
 
 
-s_vertice = int(input())
-destination_vertice_1 = int(input())
-destination_vertice_2 = int(input())
+# s_vertice = int(input())
+# destination_vertice_1 = int(input())
+# destination_vertice_2 = int(input())
 
 
-
-
-if dist[s_vertice][destination_vertice_1] < dist[s_vertice][destination_vertice_2]:
-    print(destination_vertice_1)
-else:
-    print(destination_vertice_2)
-
-
+# if dist[s_vertice][destination_vertice_1] < dist[s_vertice][destination_vertice_2]:
+#     print(destination_vertice_1)
+# else:
+#     print(destination_vertice_2)
 
 
 
@@ -828,15 +791,6 @@ else:
 #     for j in range(vertices):
 #         print(dist[i][j],end=" ")
 #     print()
-
-
-
-
-
-
-
-
-
 
 
 # vertex_count = int(input())
@@ -858,9 +812,61 @@ else:
 #     print("NE")
 
 
+# def dfs(number_of_nodes):
+#     counter = 0
+#     for i in range(number_of_nodes):
+#         if(visited[i] == False) :
+#             counter = counter + 1
+#             visited[i] = True
+#             components[i] = counter
+#             stck.add(i)
+#             while(stck.give_length() -1 >= 0):
+#                 u = stck.pop()
+#                 for n in range(number_of_nodes):
+#                     if(adjacy_matrices[u][n] == 1):
+#                         if(visited[n] != True):
+#                             visited[n] = True
+#                             stck.add(n)
+#                             components[n] = counter
+#     print(f"{components}")
 
 
 
+
+    
+    
+
+
+# number_of_nodes = 7
+# adjacy_matrices = [[0,1,0,0,0,0,0],[1,0,1,0,0,1,0],[0,1,0,1,1,0,0],[0,0,1,0,0,0,0],[0,0,1,0,0,0,0],[0,1,0,0,0,0,0],[0,0,0,0,0,0,0]]
+# visited = [False,False,False,False,False,False,False]
+# components = [0 for i in range(number_of_nodes)]
+# stck = stack()
+
+
+
+
+# def find_components(num_of_nodes):
+#     counter = 0
+#     for i in range(number_of_nodes):
+#         if(visited[i] == False):
+#             counter += 1
+#             dfs(i , counter)
+#             print(f"{counter} : {components}")
+            
+
+
+
+# def dfs(node , counter):
+#     visited[node] = True
+#     components[node] = counter
+#     for index,val in enumerate(adjacy_matrices[node]):
+#         if(val == 1 and visited[index] == False):
+#             dfs(index,counter)
+
+
+
+# find_components(number_of_nodes)
 
 
 
