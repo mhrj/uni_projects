@@ -505,24 +505,24 @@ import math
 class queue:
     
     def __init__(self):
-        self.__length = 0
         self.__list = []
         
+    def __len__(self):
+        return len(self.__list)
+
     def add(self,num):
-        self.__length += 1
         self.__list.append(num)
     
     def pop(self):
-        if(self.__length - 1 >= 0):
+        if(len(self.__list)- 1 >= 0):
            item = self.__list[0]
            del self.__list[0]
-           self.__length -= 1
            return item
         else:
             return -1
     
     def give_item(self,index):
-       if(self.__length > 0):
+       if(len(self.__list) > 0):
            item = list[index]
            return item
        else:
@@ -541,18 +541,18 @@ class queue:
 class stack:
     
     def __init__(self):
-        self.__length = 0
         self.__list = []
+
+    def __len__(self):
+        return len(self.__list)
         
     def add(self,num):
-        self.__length += 1
         self.__list.append(num)
     
     def pop(self):
-        if(self.__length - 1 >= 0):
+        if(self.__len__() - 1 >= 0):
            item = self.__list[-1]
            del self.__list[-1]
-           self.__length -= 1
            return item
         else:
             return -1
@@ -560,11 +560,9 @@ class stack:
     def give_stack(self):
         return self.__list
     
-            
-    def give_length(self):
-        return self.__length
+    def top(self):
+        return self.__list[-1]
         
-    
 
 class graph:
     
@@ -623,7 +621,7 @@ class BFS:
    def get_distance_for_all_vertices(self):
         for n in range(self.__num_of_vertices):
             self.__queue.add(n)
-            while self.__queue.give_length() - 1 >= 0:
+            while len(self.__queue) - 1 >= 0:
                 u = self.__queue.pop()
                 if u != -1:
                     for i in range(len(self.__dict_graph[u])):
@@ -640,7 +638,7 @@ class BFS:
 
 
    def get_distance_for_one_vertex_matrice_method(self):
-       while self.__queue.give_length() - 1 >= 0:
+       while len(self.__queue) - 1 >= 0:
         item = self.__queue.pop()
         if item != -1:
             for i in range(self.__num_of_vertices ** 2):
@@ -752,7 +750,7 @@ class BFS:
 #     go_forward(0,1)
 #     last_length = 0
 #     i = 0
-#     while(stck.give_length() != 0):
+#     while(len(stck) != 0):
 #         for j in range(number_of_nodes):
 #             if visited[j] == False and adjacy_matrices[i][j] == 1:
 #                 visited[j] = True
@@ -833,6 +831,72 @@ class BFS:
 
 
 
+# stck = stack()
+
+# while(True):
+#     print("1) Create",end="\n")
+#     print("2) Push",end="\n")
+#     print("3) Pop",end="\n")
+#     print("4) Top",end="\n")
+#     print("5) print",end="\n")
+#     print("6) Exit",end="\n")
+        
+    
+#     intput = int(input())
+
+#     if(intput == 1):
+#         print(stck)
+#     elif(intput == 2):
+#         print("Please enter a value : ")
+#         inp = int(input())
+#         stck.add(inp)
+#         print(f"{inp} has been added",end="\n")
+#     elif(intput == 3):
+#         v = stck.pop()
+#         print(f"{v} has been poped",end="\n")
+#     elif(intput == 4):
+#         print(f"the top one is {stck.top()}",end="\n")
+#     elif(intput == 5):
+#         print(f"{stck.give_stack()}")
+#     elif(intput == 6):
+#         print("the operation has been ended!",end="\n")
+#         break
+
+
+
+stck = stack()
+que = queue()
+
+while(True):
+    print("1) Create stack",end="\n")
+    print("2) Create queue",end="\n")
+    print("3) push",end="\n")
+    print("4) pop",end="\n")
+    print("5) pop & add to queue",end="\n")
+    print("6) remove queue",end="\n")
+    print("7) Exit",end="\n")
+    
+    intput = int(input())
+
+    if(intput == 1):
+        print(stck,end="\n")
+    elif(intput == 2):
+        print(que,end="\n")
+    elif(intput == 3):
+        print("Please enter a value : ")
+        inp = int(input())
+        stck.add(inp)
+        print(f"{inp} has been added",end="\n")
+    elif(intput == 4):
+        v = stck.pop()
+        print(f"{v} has been poped",end="\n")
+    elif(intput == 5):
+        v = stck.pop()
+        q = que.add(v)
+        print(f"{v} has been removed from stack and added to queue : {stck.give_stack()} stack : {que.give_queue()}",end="\n")
+    elif(intput == 6):
+        print("the operation has been ended!",end="\n")
+        break
     
     
 
@@ -1053,7 +1117,6 @@ class BFS:
         
         
         
-
 
 
 
