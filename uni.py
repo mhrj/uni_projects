@@ -945,91 +945,99 @@ class BFS:
 
 
 
-class grid:
-    def __init__(self):
-        self.N_DR = [-1,1,0,0]   
-        self.S_DR = [0,0,1,-1]
-        self.x = 0
-        self.y = 0  
+# class grid:
+#     def __init__(self):
+#         self.N_DR = [-1,1,0,0]   
+#         self.S_DR = [0,0,1,-1]
+#         self.x = 0
+#         self.y = 0  
     
 
-# consider every move as 1 minute
-# "." as open ways and "#" as closed ways or rocks
-# problem name : dungon problem
+# # consider every move as 1 minute
+# # "." as open ways and "#" as closed ways or rocks
+# # problem name : dungon problem
 
-problem_grid = [["S",".",".","#",".",".","."],
-                [".","#",".",".",".","#","."],
-                [".","#",".",".",".",".","."],
-                [".",".","#","#",".",".","."],
-                ["#",".","#","E",".","#","."]]
+# problem_grid = [["S",".",".","#",".",".","."],
+#                 [".","#",".",".",".","#","."],
+#                 [".","#",".",".",".",".","."],
+#                 [".",".","#","#",".",".","."],
+#                 ["#",".","#","E",".","#","."]]
 
-R = 5
-C = 7
-#bfs on grid
-is_exit = False
-color = [["W" for i in range(C)] for i in range(R)]
-parent_dict = {}
-q = queue()
+# R = 5
+# C = 7
+# #bfs on grid
+# is_exit = False
+# color = [["W" for i in range(C)] for i in range(R)]
+# parent_dict = {}
+# q = queue()
 
-# takes parent , starting point and end point to determine quickest way to the exit
-def give_shortest_path(s,e):
-    shortest_path = []
-    str_e = str(e)
-    for key,values in parent_dict.items().__reversed__():
-        for value in values:
-            if(str_e == str(value)):
-                shortest_path.append(value)
-                str_e = key
-    shortest_path.append(s)
-    shortest_path.reverse()    
-    print(f"the shortest path is : {shortest_path} \n and it takes about {len(shortest_path)} minutes to reach the exit")
+# # takes parent , starting point and end point to determine quickest way to the exit
+# def give_shortest_path(s,e):
+#     shortest_path = []
+#     str_e = str(e)
+#     for key,values in parent_dict.items().__reversed__():
+#         for value in values:
+#             if(str_e == str(value)):
+#                 shortest_path.append(value)
+#                 str_e = key
+#     shortest_path.append(s)
+#     shortest_path.reverse()    
+#     print(f"the shortest path is : {shortest_path} \n and it takes about {len(shortest_path)} minutes to reach the exit")
     
 
-# add neibourings to the queue if possible
-def add_neigbour(new_position,current_position):
-    if(problem_grid[new_position.x][new_position.y] == "E"):
-            is_exit = True
-            parent_dict[str(current_position)].append([new_position.x,new_position.y])
-            give_shortest_path([0,0],[new_position.x,new_position.y])
-    if(problem_grid[new_position.x][new_position.y] != "."): return
-    if color[new_position.x][new_position.y] == "W":
-        q.add([new_position.x,new_position.y])
-        color[new_position.x][new_position.y] = "G"
-        parent_dict[str(current_position)].append([new_position.x,new_position.y])
-        new_position = []    
+# # add neibourings to the queue if possible
+# def add_neigbour(new_position,current_position):
+#     if(problem_grid[new_position.x][new_position.y] == "E"):
+#             is_exit = True
+#             parent_dict[str(current_position)].append([new_position.x,new_position.y])
+#             give_shortest_path([0,0],[new_position.x,new_position.y])
+#     if(problem_grid[new_position.x][new_position.y] != "."): return
+#     if color[new_position.x][new_position.y] == "W":
+#         q.add([new_position.x,new_position.y])
+#         color[new_position.x][new_position.y] = "G"
+#         parent_dict[str(current_position)].append([new_position.x,new_position.y])
+#         new_position = []    
     
     
-# looks for neibourings of a point on grid(up,down,left,right)
-def search_for_neigbours(current_position,i):
-    g = grid()
-    g.x = current_position[0] + g.N_DR[i]
-    g.y = current_position[1] + g.S_DR[i]
-    if(g.x < 0 or g.y < 0): return
-    if(g.x >= R or g.y >= C): return
-    return g
+# # looks for neibourings of a point on grid(up,down,left,right)
+# def search_for_neigbours(current_position,i):
+#     g = grid()
+#     g.x = current_position[0] + g.N_DR[i]
+#     g.y = current_position[1] + g.S_DR[i]
+#     if(g.x < 0 or g.y < 0): return
+#     if(g.x >= R or g.y >= C): return
+#     return g
     
     
 
 
-def bfs_in_grid(current_position):
-    q.add(current_position)
-    while(q.give_length() - 1 >= 0 and is_exit == False):
-        item = q.pop()
-        parent_dict[str(item)] = []
-        current_position = item
-        if item != -1:
-            # looks for neibourings of a point on grid(up,down,left,right)
-            for i in range(4):
-                new_position = search_for_neigbours(current_position,i)
-                if new_position == None: continue
-            # add neibourings to the queue if possible
-                add_neigbour(new_position,current_position)
-            color[current_position[0]][current_position[1]] = "B"
+# def bfs_in_grid(current_position):
+#     q.add(current_position)
+#     while(q.give_length() - 1 >= 0 and is_exit == False):
+#         item = q.pop()
+#         parent_dict[str(item)] = []
+#         current_position = item
+#         if item != -1:
+#             # looks for neibourings of a point on grid(up,down,left,right)
+#             for i in range(4):
+#                 new_position = search_for_neigbours(current_position,i)
+#                 if new_position == None: continue
+#             # add neibourings to the queue if possible
+#                 add_neigbour(new_position,current_position)
+#             color[current_position[0]][current_position[1]] = "B"
         
 
-# place u wanna start on grid
-current_position = [0,0]
-bfs_in_grid(current_position)
+# # place u wanna start on grid
+# current_position = [0,0]
+# bfs_in_grid(current_position)
+
+
+
+# alternate approach on dungon problem
+
+
+
+
 
 
 
