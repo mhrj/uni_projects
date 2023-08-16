@@ -864,39 +864,39 @@ class BFS:
 
 
 
-stck = stack()
-que = queue()
+# stck = stack()
+# que = queue()
 
-while(True):
-    print("1) Create stack",end="\n")
-    print("2) Create queue",end="\n")
-    print("3) push",end="\n")
-    print("4) pop",end="\n")
-    print("5) pop & add to queue",end="\n")
-    print("6) remove queue",end="\n")
-    print("7) Exit",end="\n")
+# while(True):
+#     print("1) Create stack",end="\n")
+#     print("2) Create queue",end="\n")
+#     print("3) push",end="\n")
+#     print("4) pop",end="\n")
+#     print("5) pop & add to queue",end="\n")
+#     print("6) remove queue",end="\n")
+#     print("7) Exit",end="\n")
     
-    intput = int(input())
+#     intput = int(input())
 
-    if(intput == 1):
-        print(stck,end="\n")
-    elif(intput == 2):
-        print(que,end="\n")
-    elif(intput == 3):
-        print("Please enter a value : ")
-        inp = int(input())
-        stck.add(inp)
-        print(f"{inp} has been added",end="\n")
-    elif(intput == 4):
-        v = stck.pop()
-        print(f"{v} has been poped",end="\n")
-    elif(intput == 5):
-        v = stck.pop()
-        q = que.add(v)
-        print(f"{v} has been removed from stack and added to queue : {stck.give_stack()} stack : {que.give_queue()}",end="\n")
-    elif(intput == 6):
-        print("the operation has been ended!",end="\n")
-        break
+#     if(intput == 1):
+#         print(stck,end="\n")
+#     elif(intput == 2):
+#         print(que,end="\n")
+#     elif(intput == 3):
+#         print("Please enter a value : ")
+#         inp = int(input())
+#         stck.add(inp)
+#         print(f"{inp} has been added",end="\n")
+#     elif(intput == 4):
+#         v = stck.pop()
+#         print(f"{v} has been poped",end="\n")
+#     elif(intput == 5):
+#         v = stck.pop()
+#         q = que.add(v)
+#         print(f"{v} has been removed from stack and added to queue : {stck.give_stack()} stack : {que.give_queue()}",end="\n")
+#     elif(intput == 6):
+#         print("the operation has been ended!",end="\n")
+#         break
     
     
 
@@ -1098,6 +1098,61 @@ while(True):
 
 
 # alternate approach on dungon problem
+
+problem_grid = [["S",".",".","#",".",".","."],
+                [".","#",".",".",".","#","."],
+                [".","#",".",".",".",".","."],
+                [".",".","#","#",".",".","."],
+                ["#",".","#","E",".","#","."]] 
+
+R = 5
+C = 7
+color = [["W" for i in range(C)] for i in range(5)]
+
+r_q = queue()
+c_q = queue()
+rp = 0
+cp = 0
+
+move_count = 0
+nodes_left_in_layer = 1
+nodes_in_next_layer = 0
+found_exit = False
+
+r_q.add(rp)
+c_q.add(cp)
+while(len(r_q) > 0 and found_exit == False):
+    c = c_q.pop()
+    r = r_q.pop()
+    nodes_left_in_layer -= 1
+    if(c != -1 and r != -1):
+        for i in range(4):
+            N_DR = [-1,1,0,0]   
+            S_DR = [0,0,1,-1]
+            cp = c + N_DR[i] 
+            rp = r + S_DR[i]
+            if(cp < 0 or rp < 0): continue
+            elif(cp >= C or rp >= R): continue
+            if(color[rp][cp] != "W"): continue
+            if(problem_grid[rp][cp] == "#"): continue
+            if(problem_grid[rp][cp] == "E"):
+                found_exit = True
+            c_q.add(cp)
+            r_q.add(rp)
+            nodes_in_next_layer += 1
+            color[rp][cp] = "G"
+        color[r][c] = "B"
+        if(nodes_left_in_layer == 0):
+            nodes_left_in_layer = nodes_in_next_layer
+            nodes_in_next_layer = 0
+        move_count += 1
+
+print(move_count)
+
+
+
+
+
 
 
 
