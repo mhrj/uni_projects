@@ -1159,8 +1159,9 @@ class BFS:
 
 
 # topological sorting
-
-# if cycle exists this method dosent work
+# in order to make this work ==> 
+# we need DAG(directed acyclic graph) 
+# a graph with directed edges and no cycles 
 
 # num_of_nodes = 13
 
