@@ -547,12 +547,12 @@ class stack:
         return len(self.__list)
         
     def add(self,num):
-        self.__list.append(num)
+        self.__list.insert(0,num)
     
     def pop(self):
         if(self.__len__() - 1 >= 0):
-           item = self.__list[-1]
-           del self.__list[-1]
+           item = self.__list[0]
+           del self.__list[0]
            return item
         else:
             return -1
@@ -1099,56 +1099,110 @@ class BFS:
 
 # alternate approach on dungon problem
 
-problem_grid = [["S",".",".","#",".",".","."],
-                [".","#",".",".",".","#","."],
-                [".","#",".",".",".",".","."],
-                [".",".","#","#",".",".","."],
-                ["#",".","#","E",".","#","."]] 
+# problem_grid = [["S",".",".","#",".",".","."],
+#                 [".","#",".",".",".","#","."],
+#                 [".","#",".",".",".",".","."],
+#                 [".",".","#","#",".",".","."],
+#                 ["#",".","#","E",".","#","."]] 
 
-R = 5
-C = 7
-color = [["W" for i in range(C)] for i in range(5)]
+# R = 5
+# C = 7
+# color = [["W" for i in range(C)] for i in range(5)]
 
-r_q = queue()
-c_q = queue()
-rp = 0
-cp = 0
+# r_q = queue()
+# c_q = queue()
+# rp = 0
+# cp = 0
 
-move_count = 0
-nodes_left_in_layer = 1
-nodes_in_next_layer = 0
-found_exit = False
+# move_count = 0
+# nodes_left_in_layer = 1
+# nodes_in_next_layer = 0
+# found_exit = False
 
-r_q.add(rp)
-c_q.add(cp)
-while(len(r_q) > 0 and found_exit == False):
-    c = c_q.pop()
-    r = r_q.pop()
-    nodes_left_in_layer -= 1
-    if(c != -1 and r != -1):
-        for i in range(4):
-            N_DR = [-1,1,0,0]   
-            S_DR = [0,0,1,-1]
-            cp = c + N_DR[i] 
-            rp = r + S_DR[i]
-            if(cp < 0 or rp < 0): continue
-            elif(cp >= C or rp >= R): continue
-            if(color[rp][cp] != "W"): continue
-            if(problem_grid[rp][cp] == "#"): continue
-            if(problem_grid[rp][cp] == "E"):
-                found_exit = True
-            c_q.add(cp)
-            r_q.add(rp)
-            nodes_in_next_layer += 1
-            color[rp][cp] = "G"
-        color[r][c] = "B"
-        if(nodes_left_in_layer == 0):
-            nodes_left_in_layer = nodes_in_next_layer
-            nodes_in_next_layer = 0
-        move_count += 1
+# r_q.add(rp)
+# c_q.add(cp)
+# while(len(r_q) > 0 and found_exit == False):
+#     c = c_q.pop()
+#     r = r_q.pop()
+#     nodes_left_in_layer -= 1
+#     if(c != -1 and r != -1):
+#         for i in range(4):
+#             N_DR = [-1,1,0,0]   
+#             S_DR = [0,0,1,-1]
+#             cp = c + N_DR[i] 
+#             rp = r + S_DR[i]
+#             if(cp < 0 or rp < 0): continue
+#             elif(cp >= C or rp >= R): continue
+#             if(color[rp][cp] != "W"): continue
+#             if(problem_grid[rp][cp] == "#"): continue
+#             if(problem_grid[rp][cp] == "E"):
+#                 found_exit = True
+#             c_q.add(cp)
+#             r_q.add(rp)
+#             nodes_in_next_layer += 1
+#             color[rp][cp] = "G"
+#         color[r][c] = "B"
+#         if(nodes_left_in_layer == 0):
+#             nodes_left_in_layer = nodes_in_next_layer
+#             nodes_in_next_layer = 0
+#         move_count += 1
 
-print(move_count)
+# print(move_count)
 
+
+
+
+
+
+
+
+
+
+# topological sorting
+
+# if cycle exists this method dosent work
+
+# num_of_nodes = 13
+
+# graph_list = {
+#     "A":["D"],
+#     "B":["D"],
+#     "C":["A","B"],
+#     "D":["H","G"],
+#     "E":["A","D","F"],
+#     "F":["K","J"],
+#     "G":[],
+#     "H":["J","I"],
+#     "I":["L"],
+#     "J":["M","L"],
+#     "K":["J"],
+#     "L":[],
+#     "M":[],
+# }
+
+# visited = {}
+# for i in graph_list:
+#     visited[i] = False
+
+# stck = stack()
+
+
+
+# def dfs(node):
+#     visited[node] = True
+#     for value in graph_list[node]:
+#         if visited[value] == False:
+#             dfs(value)
+#             stck.add(value)
+
+# for i in graph_list:
+#     if visited[i] == False:
+#         dfs(i)
+#         stck.add(i)
+        
+        
+# print(stck.give_stack())
+        
 
 
 
