@@ -1153,11 +1153,6 @@ class BFS:
 
 
 
-
-
-
-
-
 # topological sorting
 # in order to make this work ==> 
 # we need DAG(directed acyclic graph) 
@@ -1204,13 +1199,91 @@ class BFS:
         
 # print(stck.give_stack())
         
+        
+
+
+# longest and shortest path on DAG
+
+weight_graph_list = {
+    "H":[],
+    "A":[["B",3],["C",6]],
+    "E":[["H",9]],    
+    "F":[["H",1]],
+    "B":[["C",4],["D",4],["E",11]],
+    "C":[["D",8],["G",11]],
+    "G":[["H",2]],
+    "D":[["E",-4],["F",5],["G",2]],
+}
+
+# shortest path
+
+visited = {}
+q = queue()
+prev_dist = 0
+for i in weight_graph_list:
+    visited[i] = False
+
+stck = stack()
+
+
+def top_sort():
+    search_all_nodes()
+    return stck.give_stack()
+
+
+def search_all_nodes():
+    for i in weight_graph_list:
+        if visited[i] == False:
+            dfs(i)
+            stck.add(i)
+
+def dfs(node):
+    visited[node] = True
+    for value in weight_graph_list[node]:
+        if visited[value[0]] == False:
+            dfs(value[0])
+            stck.add(value[0])
+
+top_sorted_graph = top_sort()
+
+distance = {}
+for i in top_sorted_graph:
+    distance[i] = 0
+    
+    
+def DAG_shortest_path():
+    q.add(0)
+    for i in top_sorted_graph:
+        prev_dist = distance[i]
+        if prev_dist != -1:
+            for item in weight_graph_list[i]:
+                if(distance[item[0]] == 0):
+                    distance[item[0]] = prev_dist + item[1]
+                elif(distance[item[0]] > prev_dist + item[1]):
+                    distance[item[0]] = prev_dist + item[1]
+        
+    print(f"shortest paths : {distance}")
+    
+
+# longest path
+
+def DAG_longest_path():
+    q.add(0)
+    for i in top_sorted_graph:
+        prev_dist = distance[i]
+        if prev_dist != -1:
+            for item in weight_graph_list[i]:
+                if(distance[item[0]] == 0):
+                    distance[item[0]] = prev_dist + item[1]
+                elif(distance[item[0]] < prev_dist + item[1]):
+                    distance[item[0]] = prev_dist + item[1]
+        
+    print(f"longest paths : {distance}")       
 
 
 
-
-
-
-
+DAG_shortest_path()
+DAG_longest_path()
 
 
 
