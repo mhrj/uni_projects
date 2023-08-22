@@ -530,16 +530,45 @@ class queue:
    
     def give_queue(self):
         return self.__list
+
     
-            
-    def give_length(self):
-        return self.__length
+
+class priorityQueue:
+    def __init__(self):
+        self.__list = []
+        
+    def __len__(self):
+        return len(self.__list) 
+
+    def add(self,num):
+        self.__list.append(num)
+        
+    def update(self,num):
+        self.__list[0].weight = num
+        
+    def does_exist(self,num):
+        for i in range(self.__list.__len__()):
+            if(num.to == self.__list[i].to):
+                return i
+            else:
+                return -1
+        return -1
+    
+    def pop(self):
+        if self.__len__() > 0:
+            min_val = node(weight=math.inf,to=math.inf)
+            min_val_index = 0
+            for i in range(self.__len__()):
+                if(self.__list[i].weight < min_val.weight):
+                    min_val_index = i
+                    min_val = self.__list[i]
+            del self.__list[min_val_index]
+            return min_val
     
     
-    
+       
     
 class stack:
-    
     def __init__(self):
         self.__list = []
 
@@ -1204,94 +1233,188 @@ class BFS:
 
 # longest and shortest path on DAG
 
+# weight_graph_list = {
+#     "H":[],
+#     "A":[["B",3],["C",6]],
+#     "E":[["H",9]],    
+#     "F":[["H",1]],
+#     "B":[["C",4],["D",4],["E",11]],
+#     "C":[["D",8],["G",11]],
+#     "G":[["H",2]],
+#     "D":[["E",-4],["F",5],["G",2]],
+# }
+
+# # shortest path
+
+# visited = {}
+# q = queue()
+# prev_dist = 0
+# for i in weight_graph_list:
+#     visited[i] = False
+
+# stck = stack()
+
+
+# def top_sort():
+#     search_all_nodes()
+#     return stck.give_stack()
+
+
+# def search_all_nodes():
+#     for i in weight_graph_list:
+#         if visited[i] == False:
+#             dfs(i)
+#             stck.add(i)
+
+# def dfs(node):
+#     visited[node] = True
+#     for value in weight_graph_list[node]:
+#         if visited[value[0]] == False:
+#             dfs(value[0])
+#             stck.add(value[0])
+
+# top_sorted_graph = top_sort()
+
+# distance = {}
+# for i in top_sorted_graph:
+#     distance[i] = 0
+    
+    
+# def DAG_shortest_path():
+#     q.add(0)
+#     for i in top_sorted_graph:
+#         prev_dist = distance[i]
+#         if prev_dist != -1:
+#             for item in weight_graph_list[i]:
+#                 if(distance[item[0]] == 0):
+#                     distance[item[0]] = prev_dist + item[1]
+#                 elif(distance[item[0]] > prev_dist + item[1]):
+#                     distance[item[0]] = prev_dist + item[1]
+        
+#     print(f"shortest paths : {distance}")
+    
+
+# # longest path
+
+# def DAG_longest_path():
+#     q.add(0)
+#     for i in top_sorted_graph:
+#         prev_dist = distance[i]
+#         if prev_dist != -1:
+#             for item in weight_graph_list[i]:
+#                 if(distance[item[0]] == 0):
+#                     distance[item[0]] = prev_dist + item[1]
+#                 elif(distance[item[0]] < prev_dist + item[1]):
+#                     distance[item[0]] = prev_dist + item[1]
+        
+#     print(f"longest paths : {distance}")       
+
+
+
+# DAG_shortest_path()
+# DAG_longest_path()
+
+
+
+# Dijkstra's shortest path
+
+class node:
+    def __init__(self,weight = None,to = None) -> None:
+        self.weight = weight
+        self.to = to
+
+
 weight_graph_list = {
-    "H":[],
-    "A":[["B",3],["C",6]],
-    "E":[["H",9]],    
-    "F":[["H",1]],
-    "B":[["C",4],["D",4],["E",11]],
-    "C":[["D",8],["G",11]],
-    "G":[["H",2]],
-    "D":[["E",-4],["F",5],["G",2]],
+    0 :[node(weight=5,to=1),node(weight=1,to=2)],
+    1 :[node(weight=2,to=2),node(weight=3,to=3),node(weight=20,to=4)],
+    2 :[node(weight=3,to=1),node(weight=12,to=4)],    
+    3 :[node(weight=3,to=2),node(weight=2,to=4),node(weight=6,to=5)],
+    4 :[node(weight=1,to=5)],
+    5 :[],
 }
 
-# shortest path
+parent = {}
 
-visited = {}
-q = queue()
-prev_dist = 0
 for i in weight_graph_list:
-    visited[i] = False
+    parent[i] = -1
 
-stck = stack()
+starting_node = 0
+end_node = 5
+dist = [math.inf for i in weight_graph_list]
+dist[starting_node] = 0
+visited = [False for i in weight_graph_list]
+q = priorityQueue()
 
-
-def top_sort():
-    search_all_nodes()
-    return stck.give_stack()
-
-
-def search_all_nodes():
+def find_path(s,parent):
     for i in weight_graph_list:
-        if visited[i] == False:
-            dfs(i)
-            stck.add(i)
-
-def dfs(node):
-    visited[node] = True
-    for value in weight_graph_list[node]:
-        if visited[value[0]] == False:
-            dfs(value[0])
-            stck.add(value[0])
-
-top_sorted_graph = top_sort()
-
-distance = {}
-for i in top_sorted_graph:
-    distance[i] = 0
-    
-    
-def DAG_shortest_path():
-    q.add(0)
-    for i in top_sorted_graph:
-        prev_dist = distance[i]
-        if prev_dist != -1:
-            for item in weight_graph_list[i]:
-                if(distance[item[0]] == 0):
-                    distance[item[0]] = prev_dist + item[1]
-                elif(distance[item[0]] > prev_dist + item[1]):
-                    distance[item[0]] = prev_dist + item[1]
-        
-    print(f"shortest paths : {distance}")
-    
-
-# longest path
-
-def DAG_longest_path():
-    q.add(0)
-    for i in top_sorted_graph:
-        prev_dist = distance[i]
-        if prev_dist != -1:
-            for item in weight_graph_list[i]:
-                if(distance[item[0]] == 0):
-                    distance[item[0]] = prev_dist + item[1]
-                elif(distance[item[0]] < prev_dist + item[1]):
-                    distance[item[0]] = prev_dist + item[1]
-        
-    print(f"longest paths : {distance}")       
+        path = []
+        path.append(i)
+        p = i
+        while p != 0 and p != -1:
+            a = parent[p]
+            path.append(parent[p])
+            p = parent[p]
+        path.reverse()
+        print(f"path from {s} to {i} is {path}")
 
 
+#lazy djikstra's algorithm
 
-DAG_shortest_path()
-DAG_longest_path()
-
-
-
-
-
+def lazy_djikstra():
+    n = node(weight=0,to=0)
+    q.add(n)
+    while q.__len__() > 0:
+        n = q.pop()
+        visited[n.to] = True
+        if(dist[n.to] < n.weight) : continue
+        for neighbour in weight_graph_list[n.to]:
+            if visited[neighbour.to] == True : continue
+            new_dist = dist[n.to] + neighbour.weight
+            if  new_dist < dist[neighbour.to]: 
+                dist[neighbour.to] = new_dist
+                neighbour.weight = new_dist
+                q.add(neighbour)
+                parent[neighbour.to] = n.to
+            if n.to == end_node:
+                print(dist)
+                return
             
+    find_path(starting_node,parent)
+    print(dist)    
+
+
+
+
+
+# eager djikstra's algorithm
+
+def eager_djikstra():
+    n = node(weight=0,to=0)
+    q.add(n)
+    while q.__len__() > 0:
+        n = q.pop()
+        visited[n.to] = True
+        if(dist[n.to] < n.weight) : continue
+        for neighbour in weight_graph_list[n.to]:
+            if visited[neighbour.to] == True : continue
+            new_dist = dist[n.to] + neighbour.weight
+            if  new_dist < dist[neighbour.to]:
+                does_exist = q.does_exist(neighbour) 
+                if(does_exist != -1):
+                    dist[neighbour.to] = new_dist
+                    q.update(new_dist)
+                    parent[neighbour.to] = n.to
+                else:
+                    dist[neighbour.to] = new_dist
+                    neighbour.weight = new_dist
+                    q.add(neighbour)
+                    parent[neighbour.to] = n.to
+    find_path(starting_node,parent)
+    print(dist)    
         
-            
+
+# lazy_djikstra()
+# eager_djikstra()
             
             
 
