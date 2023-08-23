@@ -42,7 +42,7 @@ num_of_nodes = 6
 pseudo_matrix = [
     [0,5,1,0,0,0],
     [0,0,2,3,20,0],
-    [0,0,0,2,12,0],
+    [0,3,0,0,12,0],
     [0,0,3,0,2,6],
     [0,0,0,0,0,1],
     [0,0,0,0,0,0]
@@ -104,7 +104,7 @@ def find_path(s,parent):
         
         
 def djkstra_with_Dheap():
-    n = node(weight=0,to=0)
+    n = create_node(0,0)
     p_q.add(n)
     while len(p_q) > 0:
         n = p_q.pop()
@@ -126,3 +126,5 @@ def djkstra_with_Dheap():
                     parent[neighbour.to] = n.to
     find_path(starting_node,parent)
     print(dist)   
+    
+djkstra_with_Dheap()
