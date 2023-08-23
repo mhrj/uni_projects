@@ -1359,7 +1359,6 @@ def find_path(s,parent):
 
 
 #lazy djikstra's algorithm
-
 def lazy_djikstra():
     n = node(weight=0,to=0)
     q.add(n)
@@ -1387,7 +1386,6 @@ def lazy_djikstra():
 
 
 # eager djikstra's algorithm
-
 def eager_djikstra():
     n = node(weight=0,to=0)
     q.add(n)
