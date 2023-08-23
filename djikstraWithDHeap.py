@@ -38,7 +38,7 @@ class priorityQueue:
 
 
 num_of_nodes = 6
-# pseudo_matrix representing matrix
+# pseudo_matrix representing graph
 pseudo_matrix = [
     [0,5,1,0,0,0],
     [0,0,2,3,20,0],
