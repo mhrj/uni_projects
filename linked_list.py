@@ -1,7 +1,31 @@
+class stack:
+    def __init__(self):
+        self.__list = []
+
+    def __len__(self):
+        return len(self.__list)
+        
+    def add(self,num):
+        self.__list.insert(0,num)
+    
+    def pop(self):
+        if(self.__len__() - 1 >= 0):
+           item = self.__list[0]
+           del self.__list[0]
+           return item
+        else:
+            return -1
+        
+    def give_stack(self):
+        return self.__list
+    
+    def top(self):
+        return self.__list[-1]
+
+
 class linkedList:
     def __init__(self):
         self.first = None
-        self.h = None
         self.length = 0
 
     class node:
@@ -34,47 +58,81 @@ class linkedList:
         self.first = f
         self.length -= 1
 
+    def delete_from_last(self):
+        item = self.first
+        for i in range(self.length - 2):
+           item = item.next
+        item.next = None
+        del item.next
+        self.length -= 1
+        
 
-class stack:
+class stackedLinkedList:
     def __init__(self):
-        self.__list = []
+        self.first = None
+        self.length = 0
 
-    def __len__(self):
-        return len(self.__list)
-        
-    def add(self,num):
-        self.__list.insert(0,num)
+    class node:
+        def __init__(self,element,next):
+            self.element = element
+            self.next = next
+
+    def print(self):
+        item = self.first
+        print(item.element)
+        for i in range(self.length - 1):
+            item = item.next
+            print(item.element)
     
-    def pop(self):
-        if(self.__len__() - 1 >= 0):
-           item = self.__list[0]
-           del self.__list[0]
-           return item
+    def add(self,element):
+        self.first = self.node(element, self.first)
+        self.length += 1
+
+    def delete(self):
+        f = self.first.next
+        first = self.first
+        del self.first
+        self.first = f
+        self.length -= 1
+        return first
+
+
+class queuedLinkedList:
+    def __init__(self):
+        self.first = None
+        self.length = 0
+
+    class node:
+        def __init__(self,element,next):
+            self.element = element
+            self.next = next
+
+    def print(self):
+        item = self.first
+        print(item.element)
+        for i in range(self.length - 1):
+            item = item.next
+            print(item.element)
+    
+    def add(self,element):
+        if self.first == None:
+            self.first = self.node(element, None)
+            self.length += 1
         else:
-            return -1
-        
-    def give_stack(self):
-        return self.__list
-    
-    def top(self):
-        return self.__list[-1]
+            item = self.first
+            for i in range(self.length - 1):
+                item = item.next
+            new_node = self.node(element, None)
+            item.next = new_node
+            self.length += 1
 
-
-stck = stack()
-stck.add(1)
-stck.add(4)
-stck.add(3)
-stck.add(5)
-stck.add(3)
-stck.add(0)
-stck.add(18)
-stck.add(3)
-stck.add(2)
-stck.add(0)
-stck.add(9)
-stck.add(1)
-stck.add(7)
-stck.add(20)
+    def delete(self):
+        f = self.first.next
+        first = self.first
+        del self.first
+        self.first = f
+        self.length -= 1
+        return first
 
 
 class orderedLinkedList:
@@ -151,25 +209,6 @@ class orderedLinkedList:
                     first.next = new_node
                     self.length += 1
 
-
-
-# execute
-l = orderedLinkedList()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-l.add_ordered()
-print(l.show_as_list())
 
 
 
