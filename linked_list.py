@@ -65,7 +65,7 @@ class linkedList:
         item.next = None
         del item.next
         self.length -= 1
-        
+
 
 class stackedLinkedList:
     def __init__(self):
@@ -145,26 +145,6 @@ class orderedLinkedList:
         def __init__(self,element,next):
             self.element = element
             self.next = next
-    
-    def add_to_first(self,element):
-        self.first = self.node(element, self.first)
-        self.length += 1
-    
-    def add_to_last(self,element):
-        item = self.first
-        for i in range(self.length - 1):
-           item = item.next
-        new_node = self.node(element, None)
-        item.next = new_node
-        self.length += 1
-
-    def print(self):
-        item = self.first
-        print(item.element)
-        for i in range(self.length - 1):
-            item = item.next
-            print(item.element)
-
 
     def show_as_list(self):
         item = self.first
