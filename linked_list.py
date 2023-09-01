@@ -162,7 +162,7 @@ class orderedLinkedList:
         self.length -= 1
 
 
-    def add_ordered(self):
+    def add_ordered(self,stck):
         element = stck.pop()
         if self.first == None:
             self.first = self.node(element, self.first)
