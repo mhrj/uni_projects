@@ -191,6 +191,62 @@ class orderedLinkedList:
 
 
 
+class GraphLinkedList:
+    def __init__(self):
+        self.list = []
+        self.v_count = []
+
+    class Node:
+        def __init__(self,element,next):
+            self.element = element
+            self.next = next
+
+    def make_linked_list(self):
+        num_of_nodes = int(input())
+        for i in range(num_of_nodes):
+            new_node = self.Node(i,None)
+            self.list.append(new_node)
+            self.v_count.append(0)
+
+
+    def add_neighbours(self):
+        from_v = int(input())
+        to_v = int(input())
+        p = self.list[from_v]
+        for i in range(self.v_count[from_v]):
+            p = p.next
+        p.next = self.Node(to_v, None)
+        self.v_count[from_v] += 1
+
+    def print(self):
+        for i in self.list:
+            if i.next == None: continue
+            print(f"node {i.element} ===>")
+            p = i.next
+            for j in range(self.v_count[i.element]):
+                print(f"   {p.element}")
+                p = p.next
+
+
+
+
+
+
+
+l = GraphLinkedList()
+l.make_linked_list()
+l.add_neighbours()
+l.add_neighbours()
+l.add_neighbours()
+l.add_neighbours()
+l.add_neighbours()
+l.print()
+
+    
+
+    
+
+
 
 
 
