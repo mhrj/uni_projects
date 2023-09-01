@@ -201,22 +201,29 @@ class GraphLinkedList:
             self.element = element
             self.next = next
 
-    def make_linked_list(self):
-        num_of_nodes = int(input())
+    def make_linked_list(self,num_of_nodes):
         for i in range(num_of_nodes):
             new_node = self.Node(i,None)
             self.list.append(new_node)
             self.v_count.append(0)
 
 
-    def add_neighbours(self):
-        from_v = int(input())
-        to_v = int(input())
+    def add_neighbours(self,from_v,to_v):
         p = self.list[from_v]
         for i in range(self.v_count[from_v]):
             p = p.next
         p.next = self.Node(to_v, None)
         self.v_count[from_v] += 1
+        
+        
+    def adjacency_to_linked_list(self,num_of_nodes,adjacency):
+        self.make_linked_list(num_of_nodes)
+        for i in self.list:
+            from_v = i.element
+            for j in range(num_of_nodes):
+                if(adjacency[from_v][j] == 1):
+                    to_v = j
+                    self.add_neighbours(from_v,to_v)
 
     def print(self):
         for i in self.list:
@@ -229,18 +236,6 @@ class GraphLinkedList:
 
 
 
-
-
-
-
-l = GraphLinkedList()
-l.make_linked_list()
-l.add_neighbours()
-l.add_neighbours()
-l.add_neighbours()
-l.add_neighbours()
-l.add_neighbours()
-l.print()
 
     
 
