@@ -150,7 +150,7 @@ class MinHeap():
         
         
         
-class heapify():
+class Heapify():
     
     def __init__(self,arr):
         self.__heap = arr
@@ -224,3 +224,12 @@ class heapify():
     def create_max_heap(self):
         parent_index = self.__length - 1
         self.__rearange_from_bottom_to_top_max_heapify(parent_index)
+        
+        
+
+class MinIndexedDHeap():
+    
+    def __init__(self,degree):
+        self.heap = []
+        self.degree = degree
+    
