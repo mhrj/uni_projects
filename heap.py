@@ -1,6 +1,7 @@
 import math
 
 class MaxHeap:
+    
     def __init__(self,heap):
         self.__heap = heap
         self.__length = len(heap)
@@ -74,6 +75,7 @@ class MaxHeap:
     
     
 class MinHeap():
+    
     def __init__(self,heap):
         self.__heap = heap
         self.__length = len(heap)
@@ -89,7 +91,8 @@ class MinHeap():
             self.__heap[parent_index] = child_val
             
             
-    def rearrange_from_bottom_to_top(self,element):
+    def rearrange_from_bottom_to_top(self):
+            element = self.__heap[-1]
             child_index = self.__length - 1
             parent_index = math.floor((self.__length / 2)) - 1
             while(element < self.__heap[parent_index]):
@@ -147,8 +150,6 @@ class MinHeap():
         
         
         
-       
-    
 class heapify():
     
     def __init__(self,arr):
@@ -164,30 +165,33 @@ class heapify():
             self.__heap[child_index] = self.__heap[parent_index]
             self.__heap[parent_index] = child_val
     
-    
-    def create_min_heap(self):
-        parent_index = self.__length - 1
+    def __rearange_from_bottom_to_top_min_heapify(self,parent_index):
+        current_point = None
         child_index = (parent_index * 2) + 1
         while(parent_index >= 0):
             if(child_index <= self.__length - 1):
                 if(self.__heap[child_index] > self.__heap[child_index + 1]):
                     if(self.__heap[child_index + 1] < self.__heap[parent_index]):
                         self.swap_child_and_parent(parent_index,child_index)
-                    parent_index -= 1
+                    if(current_point == None): current_point = parent_index - 1
+                    parent_index = child_index
                     child_index = (parent_index * 2) + 1
                 else:
                     if(self.__heap[child_index] < self.__heap[parent_index]):
                         self.swap_child_and_parent(parent_index,child_index)  
-                    parent_index -= 1
+                    if(current_point == None): current_point = parent_index - 1
+                    parent_index = child_index
                     child_index = (parent_index * 2) + 1
             else: 
-                parent_index -= 1
+                if current_point != None:
+                    parent_index = current_point
+                    current_point = None
+                else:
+                    parent_index -= 1
                 child_index = (parent_index * 2) + 1
-        
-    
-    def create_max_heap(self):
+                
+    def __rearange_from_bottom_to_top_max_heapify(self,parent_index):
         current_point = None
-        parent_index = self.__length - 1
         child_index = (parent_index * 2) + 1
         while(parent_index >= 0):
             if(child_index <= self.__length - 1):
@@ -210,17 +214,13 @@ class heapify():
                 else:
                     parent_index -= 1
                 child_index = (parent_index * 2) + 1
+    
+    
+    def create_min_heap(self):
+        parent_index = self.__length - 1
+        self.__rearange_from_bottom_to_top_min_heapify(parent_index)
         
-print([10,20,15,12,40,25,18])
-
-# min_heap = heapify([10,20,15,12,40,25,18])
-# min_heap.create_min_heap()
-# print(f" min_heap ===> {min_heap.show_heap()}")
-
-heap = heapify([10,20,15,12,40,25,18])
-heap.create_max_heap()
-print(f" max_heap ===> {heap.get_heap()}")
-
-max_heap = MaxHeap(heap.get_heap())
-max_heap.insert(100)
-print(max_heap.show_heap())
+    
+    def create_max_heap(self):
+        parent_index = self.__length - 1
+        self.__rearange_from_bottom_to_top_max_heapify(parent_index)
