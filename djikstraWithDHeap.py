@@ -5,37 +5,37 @@ import math
 import heap
 
 # to priortize the node with less wieght to be next in the queue
-# class priorityQueue:
-#     def __init__(self):
-#         self.__list = []
+class priorityQueue:
+    def __init__(self):
+        self.__list = []
         
-#     def __len__(self):
-#         return len(self.__list) 
+    def __len__(self):
+        return len(self.__list) 
 
-#     def add(self,weight):
-#         self.__list.append(weight)
+    def add(self,weight):
+        self.__list.append(weight)
         
-#     def update(self,weight):
-#         self.__list[0].weight = weight
+    def update(self,weight):
+        self.__list[0].weight = weight
         
-#     def does_exist(self,weight):
-#         for i in range(self.__list.__len__()):
-#             if(weight.to == self.__list[i].to):
-#                 return i
-#             else:
-#                 return -1
-#         return -1
+    def does_exist(self,weight):
+        for i in range(self.__list.__len__()):
+            if(weight.to == self.__list[i].to):
+                return i
+            else:
+                return -1
+        return -1
     
-#     def pop(self):
-#         if self.__len__() > 0:
-#             min_val = node(weight=math.inf,to=math.inf)
-#             min_val_index = 0
-#             for i in range(self.__len__()):
-#                 if(self.__list[i].weight < min_val.weight):
-#                     min_val_index = i
-#                     min_val = self.__list[i]
-#             del self.__list[min_val_index]
-#             return min_val
+    def pop(self):
+        if self.__len__() > 0:
+            min_val = node(weight=math.inf,to=math.inf)
+            min_val_index = 0
+            for i in range(self.__len__()):
+                if(self.__list[i].weight < min_val.weight):
+                    min_val_index = i
+                    min_val = self.__list[i]
+            del self.__list[min_val_index]
+            return min_val
 
 
 num_of_nodes = 6
