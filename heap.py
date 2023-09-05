@@ -151,7 +151,6 @@ class MinHeap():
         
         
 class Heapify():
-    
     def __init__(self,arr):
         self.__heap = arr
         self.__length = len(arr)
@@ -224,12 +223,105 @@ class Heapify():
     def create_max_heap(self):
         parent_index = self.__length - 1
         self.__rearange_from_bottom_to_top_max_heapify(parent_index)
-        
-        
 
 class MinIndexedDHeap():
     
     def __init__(self,degree):
-        self.heap = []
-        self.degree = degree
+        self.__heap = []
+        self.__length = 0
+        self.__degree = degree
+         
     
+    def show_heap(self):
+        return self.__heap
+    
+    def show_length(self):
+        return self.__length
+    
+
+    def swap_child_and_parent(self,parent_index,child_index):
+            child_val = self.__heap[child_index]
+            self.__heap[child_index] = self.__heap[parent_index]
+            self.__heap[parent_index] = child_val
+
+        
+    def __rearrange_from_bottom_to_top(self):
+            element = self.__heap[-1]
+            child_index = self.__length - 1
+            parent_index = math.floor((child_index - 1) / self.__degree)
+            while(element.weight < self.__heap[parent_index].weight and child_index > 0):
+                self.swap_child_and_parent(parent_index,child_index)
+                child_index = parent_index
+                parent_index = math.floor((child_index - 1) / self.__degree)
+                
+                
+    def __rearange_from_top_to_bottom(self):
+        child_index = 1
+        element_to_compare = self.__heap[0].weight
+        while(self.__length - 1 > child_index):
+            least_index = child_index
+            num_of_repeat = 0
+            element_to_compare_index = math.floor((child_index - 1) / self.__degree)
+            while(child_index + 1 < self.__length - 1 and num_of_repeat < self.__degree - 1):
+                if(self.__heap[least_index].weight < self.__heap[child_index + 1].weight):
+                    least_index = least_index
+                else:
+                    least_index = child_index + 1
+                child_index += 1
+                num_of_repeat += 1
+            if(self.__heap[least_index].weight < element_to_compare):
+                self.swap_child_and_parent(element_to_compare_index,least_index)
+                child_index = ((least_index + 1) * self.__degree) - (self.__degree - 1)
+            else:
+                break
+            
+            
+    def __rearange_from_a_point_to_top(self,element_index):
+        element = self.__heap[element_index].weight
+        child_index = element_index
+        parent_index = math.floor((child_index - 1) / self.__degree)
+        while(element < self.__heap[parent_index].weight and child_index > 0):
+            self.swap_child_and_parent(parent_index,child_index)
+            child_index = parent_index
+            parent_index = math.floor((child_index - 1) / self.__degree)
+        
+        
+    def insert(self,element):
+        if self.__length > 0:
+            self.__heap.append(element)
+            self.__length += 1
+            self.__rearrange_from_bottom_to_top()
+        else:
+            self.__heap.append(element)
+            self.__length += 1
+    
+    
+    def remove(self):
+        if(self.__length <= 0) : return
+        element = self.__heap[0]
+        if(self.__length - 1 != 0):
+            self.__heap[0] = self.__heap[-1]
+            del self.__heap[-1]
+            self.__rearange_from_top_to_bottom()
+            self.__length -= 1
+            return element
+        else:
+            self.__length -= 1
+            del self.__heap[-1]
+            return element
+        
+    
+    def update(self,element,val):
+        for i in range(self.__length):
+            if(element == self.__heap[i].to):
+                self.__heap[i].weight = val
+                self.__rearange_from_a_point_to_top(i)
+
+
+    def does_exist(self,node):
+        for i in range(self.__length):
+            if(node.to == self.__heap[i].to):
+                return i
+            else:
+                return -1
+        return -1
