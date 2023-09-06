@@ -574,6 +574,10 @@ class stack:
 
     def __len__(self):
         return len(self.__list)
+    
+    
+    def clear(self):
+        self.__list = []
         
     def add(self,num):
         self.__list.insert(0,num)
