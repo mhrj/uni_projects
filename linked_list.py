@@ -195,11 +195,15 @@ class GraphLinkedList:
     def __init__(self):
         self.list = []
         self.v_count = []
+        self.time = 0
 
     class Node:
         def __init__(self,element,next):
             self.element = element
             self.next = next
+            self.d = 0
+            self.f = 0
+            self.p = -1
 
     def make_linked_list(self,num_of_nodes):
         for i in range(num_of_nodes):
