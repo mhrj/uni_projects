@@ -311,17 +311,16 @@ class MinIndexedDHeap():
             return element
         
     
-    def update(self,element,val):
+    def update(self,element,val,origin = 0):
         for i in range(self.__length):
             if(element == self.__heap[i].to):
                 self.__heap[i].weight = val
+                self.__heap[i].origin = origin
                 self.__rearange_from_a_point_to_top(i)
 
 
     def does_exist(self,node):
         for i in range(self.__length):
             if(node.to == self.__heap[i].to):
-                return i
-            else:
-                return -1
+                return self.__heap[i]
         return -1
