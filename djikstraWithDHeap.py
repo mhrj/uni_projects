@@ -2,7 +2,7 @@
 # djikstra with dense graph
 
 import math
-import heap
+import customheap
 
 # to priortize the node with less wieght to be next in the queue
 class priorityQueue:
@@ -92,7 +92,7 @@ parent = create_parent(weight_graph_list)
 dist = create_dist(weight_graph_list,starting_node)
 visited = create_visited(weight_graph_list)
 degree = math.ceil(edges / num_of_nodes)
-ipq = heap.MinIndexedDHeap(degree)
+ipq = customheap.MinIndexedDHeap(degree)
 
 
 def find_path(s,parent):

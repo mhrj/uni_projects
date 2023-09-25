@@ -1,7 +1,7 @@
 import math
 import customqueue
 import graphstructures
-import heap
+import customheap
 
 
 # number_of_nodes = 8
@@ -92,7 +92,7 @@ def calculate_all_edges():
         for node in row:
             if(node != -1):
                 edge += 1
-    return edge
+    return edge / 2
 
 
 path_cost = 0
@@ -101,7 +101,7 @@ visited = create_visited()
 mst = create_mst_dict()
 edges = calculate_all_edges()
 degree = math.ceil(edges / number_of_nodes)
-ipq = heap.MinIndexedDHeap(degree)
+ipq = customheap.MinIndexedDHeap(degree)
 
 
 def eager_prim():
